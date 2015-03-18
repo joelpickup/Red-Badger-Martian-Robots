@@ -10,6 +10,6 @@ class Mars
   end
 
   def add_lost_robot_coord(robot)
-    lost_robot_coords.push(robot.coords)
+    lost_robot_coords.push(robot.lost_coords)
   end
 end

@@ -7,6 +7,21 @@ def menu
   robot = deploy_robot
   robot.move(ask_for_instructions, mars)
   print robot.position_string
+  if robot.lost?
+    mars.add_lost_robot_coord(robot)
+  end
+  robot = deploy_robot
+  robot.move(ask_for_instructions, mars)
+  print robot.position_string
+  if robot.lost?
+    mars.add_lost_robot_coord(robot)
+  end
+  robot = deploy_robot
+  robot.move(ask_for_instructions, mars)
+  print robot.position_string
+  if robot.lost?
+    mars.add_lost_robot_coord(robot)
+  end
   gets
 end
 

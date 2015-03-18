@@ -3,6 +3,7 @@ class Robot
   attr_accessor :y_coord
   attr_accessor :orientation
   attr_accessor :status
+  attr_accessor :lost_coords
 
   def initialize(position)
     self.x_coord = position[0].to_i
@@ -19,10 +20,11 @@ class Robot
       when 'R'
         turn('right')
       when 'F'
-        move_forward(mars)
-        if self.x_coord > mars.x_length || self.y_coord > mars.y_length || self.x_coord < 0 || self.y_coord < 0
-          self.status = "LOST"
-        end
+          move_forward(mars)
+          if self.x_coord > mars.x_length || self.y_coord > mars.y_length || self.x_coord < 0 || self.y_coord < 0
+            self.status = "LOST"
+            self.lost_coords = [self.x_coord,self.y_coord]
+          end
       end
     end
   end
@@ -44,13 +46,21 @@ class Robot
   def move_forward(mars)
     case orientation
     when 'N'
-      self.y_coord += 1
+      unless mars.lost_robot_coords.include?([self.x_coord, self.y_coord + 1])
+        self.y_coord += 1
+      end
     when 'S'
-      self.y_coord -= 1
+      unless mars.lost_robot_coords.include?([self.x_coord, self.y_coord - 1])
+        self.y_coord -= 1
+      end
     when 'E'
-      self.x_coord += 1
+      unless mars.lost_robot_coords.include?([self.x_coord + 1, self.y_coord])
+        self.x_coord += 1
+      end
     when 'W'
-      self.x_coord -= 1 
+      unless mars.lost_robot_coords.include?([self.x_coord - 1, self.y_coord])
+        self.x_coord -= 1 
+      end
     end
   end
 
