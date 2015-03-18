@@ -8,4 +8,8 @@ class Mars
     self.y_length = coords[1]
     self.lost_robot_coords = []
   end
+
+  def add_lost_robot_coord(robot)
+    lost_robot_coords.push(robot.coords)
+  end
 end

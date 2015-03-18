@@ -11,7 +11,7 @@ class Robot
     self.status = "DEPLOYED"
   end
 
-  def move(instructions)
+  def move(instructions, mars)
     instructions.each do |instruction|
       case instruction
       when 'L'
@@ -19,7 +19,12 @@ class Robot
       when 'R'
         turn('right')
       when 'F'
-        move_forward
+        if status = "DEPLOYED"
+          move_forward(mars)
+          if x_coord > mars.x_length || y_coord > mars.y_length || x_coord < 0 || y_coord < 0
+            lose_self
+          end
+        end
       end
     end
   end
@@ -34,20 +39,33 @@ class Robot
   end
  end
 
-  def move_forward
-    case orientation
-    when 'N'
-      x_coord += 1
-    when 'S'
-      x_coord -= 1
-    when 'E'
-      y_coord += 1
-    when 'W'
-      y_coord -= 1 
-    end
+  def move_forward(mars)
+      case orientation
+      when 'N'
+        y_coord += 1
+      when 'S'
+        y_coord -= 1
+      when 'E'
+        x_coord += 1
+      when 'W'
+        x_coord -= 1 
+      end
   end
 
   def position_string
-    "#{x_coord} #{y_coord} #{orientation}"
+    string = "#{x_coord} #{y_coord} #{orientation}"
+    string + " LOST" if status == "LOST"
+  end
+
+  def lose_self
+    status = "LOST"
+  end
+
+  def lost?
+    status == "LOST"
+  end
+
+  def coords
+    [x_coord, y_coord]
   end
 end
