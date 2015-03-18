@@ -27,8 +27,8 @@ class Robot
  def turn(direction)
   poles = ['N','E','S','W']
   current = poles.index(robot.orientation)
-  if direction = 'left'
-    robot.orienation = poles[current - 1]
+  if direction == 'left'
+    robot.orientation = poles[current - 1]
   else
     robot.orientation = poles[current + 1]
   end
@@ -41,8 +41,13 @@ class Robot
     when 'S'
       x_coord -= 1
     when 'E'
-      x_coord += 1
+      y_coord += 1
     when 'W'
-      x_coord -= 1 
+      y_coord -= 1 
+    end
+  end
+
+  def position_string
+    "#{x_coord} #{y_coord} #{orientation}"
   end
 end
