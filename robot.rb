@@ -8,7 +8,7 @@ class Robot
     self.x_coord = position[0].to_i
     self.y_coord = position[1].to_i
     self.orientation = position[2]
-    self.status = "DEPLOYED"
+    self.status = ""
   end
 
   def move(instructions, mars)
@@ -20,6 +20,9 @@ class Robot
         turn('right')
       when 'F'
         move_forward(mars)
+        if self.x_coord > mars.x_length || self.y_coord > mars.y_length || self.x_coord < 0 || self.y_coord < 0
+          self.status = "LOST"
+        end
       end
     end
   end
@@ -52,7 +55,7 @@ class Robot
   end
 
   def position_string
-    string = "#{x_coord} #{y_coord} #{orientation}"
+    string = "#{x_coord} #{y_coord} #{orientation} #{status}"
   end
 
   def lose_self
