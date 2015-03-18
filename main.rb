@@ -28,7 +28,7 @@ end
 
 def deploy_robot
   print "Please enter the Robot's position:"
-  position = gets.chomp.split
+  position = gets.chomp.upcase.split
   Robot.new(position)
 end
 

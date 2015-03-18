@@ -15,40 +15,24 @@ class Robot
     instructions.each do |instruction|
       case instruction
       when 'L'
-        turn_left
+        turn('left')
       when 'R'
-        turn_right
+        turn('right')
       when 'F'
         move_forward
       end
     end
   end
 
-  def turn_left
-    case orientation
-    when 'N'
-      orientation = 'W'
-    when 'W'
-      orientation = 'S'
-    when 'S'
-      orientation = 'E'
-    when 'E'
-      orientation = 'N'
-    end
+ def turn(direction)
+  poles = ['N','E','S','W']
+  current = poles.index(robot.orientation)
+  if direction = 'left'
+    robot.orienation = poles[current - 1]
+  else
+    robot.orientation = poles[current + 1]
   end
-
-  def turn_right
-    case orientation
-    when 'N'
-      orientation = 'E'
-    when 'E'
-      orientation = 'S'
-    when 'S'
-      orientation = 'W'
-    when 'W'
-      orientation = 'N'
-    end
-  end
+ end
 
   def move_forward
     case orientation
