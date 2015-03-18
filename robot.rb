@@ -19,42 +19,40 @@ class Robot
       when 'R'
         turn('right')
       when 'F'
-        if status = "DEPLOYED"
-          move_forward(mars)
-          if x_coord > mars.x_length || y_coord > mars.y_length || x_coord < 0 || y_coord < 0
-            lose_self
-          end
-        end
+        move_forward(mars)
       end
     end
   end
 
  def turn(direction)
   poles = ['N','E','S','W']
-  current = poles.index(robot.orientation)
-  if direction == 'left'
-    robot.orientation = poles[current - 1]
-  else
-    robot.orientation = poles[current + 1]
-  end
+  current = poles.index(orientation)
+    if direction == 'left'
+      self.orientation = poles[current - 1]
+    else
+      if current + 1 == 4
+        self.orientation = 'N'
+      else
+        self.orientation = poles[current + 1]
+      end
+    end
  end
 
   def move_forward(mars)
-      case orientation
-      when 'N'
-        y_coord += 1
-      when 'S'
-        y_coord -= 1
-      when 'E'
-        x_coord += 1
-      when 'W'
-        x_coord -= 1 
-      end
+    case orientation
+    when 'N'
+      self.y_coord += 1
+    when 'S'
+      self.y_coord -= 1
+    when 'E'
+      self.x_coord += 1
+    when 'W'
+      self.x_coord -= 1 
+    end
   end
 
   def position_string
     string = "#{x_coord} #{y_coord} #{orientation}"
-    string + " LOST" if status == "LOST"
   end
 
   def lose_self

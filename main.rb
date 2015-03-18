@@ -5,7 +5,7 @@ def menu
   puts 'Welcome to Mars!'
   mars = Mars.new(ask_for_mars_boundaries)
   robot = deploy_robot
-  robot.move(ask_for_instructions)
+  robot.move(ask_for_instructions, mars)
   print robot.position_string
   gets
 end
@@ -35,7 +35,7 @@ end
 
 def ask_for_instructions
   print "Please enter instructions for the robot:"
-  instructions = gets.chomp.upcase.split
+  instructions = gets.chomp.upcase.split("")
 end
 
 menu
