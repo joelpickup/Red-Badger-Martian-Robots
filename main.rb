@@ -4,24 +4,9 @@ require_relative 'robot'
 def menu
   puts 'Welcome to Mars!'
   mars = Mars.new(ask_for_mars_boundaries)
-  robot = deploy_robot
-  robot.move(ask_for_instructions, mars)
-  print robot.position_string
-  if robot.lost?
-    mars.add_lost_robot_coord(robot)
-  end
-  robot = deploy_robot
-  robot.move(ask_for_instructions, mars)
-  print robot.position_string
-  if robot.lost?
-    mars.add_lost_robot_coord(robot)
-  end
-  robot = deploy_robot
-  robot.move(ask_for_instructions, mars)
-  print robot.position_string
-  if robot.lost?
-    mars.add_lost_robot_coord(robot)
-  end
+  send_robot(mars)
+  send_robot(mars)
+  send_robot(mars)
   gets
 end
 
@@ -51,6 +36,15 @@ end
 def ask_for_instructions
   print "Please enter instructions for the robot:"
   instructions = gets.chomp.upcase.split("")
+end
+
+def send_robot(mars)
+  robot = deploy_robot
+  robot.move(ask_for_instructions, mars)
+  print robot.position_string
+  if robot.lost?
+    mars.add_lost_robot_coord(robot)
+  end
 end
 
 menu

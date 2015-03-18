@@ -65,11 +65,9 @@ class Robot
   end
 
   def position_string
-    string = "#{x_coord} #{y_coord} #{orientation} #{status}"
-  end
-
-  def lose_self
-    status = "LOST"
+    string = "#{x_coord} #{y_coord} #{orientation}"
+    string += " LOST" if self.lost?
+    return string
   end
 
   def lost?
