@@ -1,10 +1,11 @@
 require_relative 'mars'
+require_relative 'robot'
 
 def menu
   puts 'Welcome to Mars!'
   mars = Mars.new(ask_for_mars_boundaries)
-  print mars.x_length
-  print mars.y_length
+  robot = deploy_robot
+  puts robot
   gets
 end
 
@@ -23,6 +24,12 @@ def ask_for_value
     x = gets.chomp
   end
   x
+end
+
+def deploy_robot
+  print "Please enter the Robot's position:"
+  position = gets.chomp.split
+  Robot.new(position)
 end
 
 menu
