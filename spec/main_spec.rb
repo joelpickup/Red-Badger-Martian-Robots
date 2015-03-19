@@ -23,6 +23,9 @@ end
 describe '#move' do
   it "should disregard a move if robot fallen off already, and finish instructions" do
     mars = Mars.new(['5','3'])
+    robot = Robot.new(['0','3','W'])
+    robot.move('LLFFFLFLFL'.split(""), mars)
+    expect(robot.position_string).to eq '2 4 S LOST'
     mars.lost_robot_coords.push([3,4])
     robot = Robot.new(['0','3','W'])
     robot.move('LLFFFLFLFL'.split(""), mars)

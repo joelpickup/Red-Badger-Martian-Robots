@@ -41,7 +41,7 @@ class Robot
         self.orientation = poles[current + 1]
       end
     end
- end
+ end  
 
   def move_forward(mars)
     case orientation
