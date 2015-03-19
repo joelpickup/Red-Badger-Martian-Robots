@@ -32,3 +32,23 @@ describe '#turn' do
     expect(robot.orientation).to eq 'W'
   end
 end
+
+describe '#move_forward' do
+  it 'should increase or decrease the x or y coordinate correctly depending on orienation' do
+    mars = Mars.new(['5','3'])
+    robot1 = Robot.new(['1','1','N'])
+    robot2 = Robot.new(['1','1','S'])
+    robot3 = Robot.new(['1','1','E'])
+    robot4 = Robot.new(['1','1','W'])
+    robot1.move_forward(mars)
+    robot2.move_forward(mars)
+    robot3.move_forward(mars)
+    robot4.move_forward(mars)
+    expect(robot1.coords).to eq [1,2]
+    expect(robot2.coords).to eq [1,0]
+    expect(robot3.coords).to eq [2,1]
+    expect(robot4.coords).to eq [0,1]
+  end
+end
+
+
