@@ -4,10 +4,10 @@ require_relative 'robot'
 def menu
   puts 'Welcome to Mars!'
   mars = Mars.new(ask_for_mars_boundaries)
-  send_robot(mars)
-  send_robot(mars)
-  send_robot(mars)
-  gets
+  response = send_robot(mars)
+  while response == "Y"
+    response = send_robot(mars)
+  end
 end
 
 def ask_for_mars_boundaries
@@ -41,10 +41,12 @@ end
 def send_robot(mars)
   robot = deploy_robot
   robot.move(ask_for_instructions, mars)
-  print robot.position_string
+  puts robot.position_string
   if robot.lost?
     mars.add_lost_robot_coord(robot)
   end
+  puts "Send another robot?(Y/N):"
+  gets.chomp
 end
 
 menu
